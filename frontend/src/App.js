@@ -1,23 +1,25 @@
-import React from 'react';
+import React                                      from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import HomePage from './pages/HomePage';
-import SignUpPage from './pages/SignUpPage';
-import SignInPage from './pages/SignInPage';
+import HomePage                                   from './pages/HomePage.js';
+import SignUpPage                                 from './pages/SignUpPage.js';
+import SignInPage                                 from './pages/SignInPage.js';
 
 function App () {
   return (
     <Router>
       <Switch>
-        <Route exact path="/"
-               children={HomePage}/>
 
-        <Route path="sigh_up"
-               component={SignUpPage}/>
+        <Route exact path="/">
+          <HomePage/>
+        </Route>
 
-        <Route path={['/sigh_in', '/login']}>
 
+        <Route path="/sign_up">
+          <SignUpPage/>
+        </Route>
+
+        <Route path={['/sign_in', '/login']}>
           <SignInPage/>
-
         </Route>
 
       </Switch>

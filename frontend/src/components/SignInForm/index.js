@@ -1,39 +1,29 @@
-import React, { Component } from 'react';
-import { Formik, Form, Field } from 'formik';
-import PropTypes from 'prop-types'
+import React                       from 'react';
+import { Form, Field, withFormik } from 'formik';
+import Input                       from '../Input/input.js';
 
-class SignInForm extends Component{
+const handleSubmit = (values) => {
+  console.log( values );
+};
 
-  renderFormik = (formikProps) => {
-    console.log(formikProps);
-    return(
-      <Form>
-        <Field type="email" name="email"/>
-        <Field type="password" name="password"/>
-      </Form>
-    )
-  }
+const SignInForm = (props) => {
+  console.log( props );
 
-  handleSubmit = (values) => {
-    console.log(values)
-  };
+  return (
+    <Form>
+      <Field type="email" name="email" componet={Input}/>
+      <Field type="password" name="password"/>
+      <div onClick={props.submitForm}>login</div>
+    </Form>
+  );
 
-  render () {
-    const {} =this.props;
-    return (
-      <Formik onSubmit={this.handleSubmit} initialValues={{
-        password:'',
-        email:'',
+};
 
-      }}>
-        {
-          this.renderFormik()
-        }
-      </Formik>
-    );
-  }
-}
-
-s
-
-export default SignInForm;
+export default withFormik( {
+                             mapPropsToValues: () => ({ email: '', password: '' }),
+                             initialValues: {
+                               email: '',
+                               password: '',
+                             },
+                             handleSubmit,
+                           } )( SignInForm );

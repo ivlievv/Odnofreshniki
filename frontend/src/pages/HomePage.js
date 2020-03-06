@@ -1,17 +1,12 @@
-import React from 'react';
-import {withRouter} from 'react-router';
+import React          from 'react';
+import { withRouter } from 'react-router';
 
 function HomePage (props) {
-  console.log(props);
   return (
-    <>
-      <h1>Home Page</h1>
-      <button onClick={() => {
-        props.history.push('./sigh_up')
-      }}>SignUp
-      </button>
-    </>
+
+    <h1>Home Page</h1>
+
   );
 }
 
-export default withRouter(HomePage);
+export default withRouter( HomePage );
