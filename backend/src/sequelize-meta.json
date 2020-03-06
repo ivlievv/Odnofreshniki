@@ -1,0 +1,6 @@
+[
+  "20200210144612-create-user.js",
+  "20200212132514-create-task.js",
+  "20200212142458-alter-task-add-column.js",
+  "20200306141357-create-refresh-token.js"
+]
