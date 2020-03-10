@@ -1,0 +1,33 @@
+.container {
+
+  position: relative;
+
+
+}
+
+.defaultClass {
+
+
+}
+
+.validClass {
+
+  border-color: green;
+  outline-color: green;
+}
+
+.invalidClass {
+
+  border: red;
+  outline-color: red;
+}
+
+.errorTip {
+  position: absolute;
+  z-index: 1;
+  color: white;
+  background-color: #282c34;
+  box-sizing: border-box;
+  padding: 20px;
+  top: 100%;
+}

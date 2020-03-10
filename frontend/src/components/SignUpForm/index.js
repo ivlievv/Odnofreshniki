@@ -1,10 +1,24 @@
 import React, { Component } from 'react';
+import { Form, Field } from 'formik';
+import Input           from '../Input';
 
-class SignUpForm extends Component {
+const SignUpForm = (props) => {
 
-  render () {
-    return null;
-  }
-}
+
+
+  return (
+
+    <Form>
+      <Field type="email"
+             name="email"
+             onChange={(e) => {console.log( e.target.value );}}
+             children={Input}/>
+      <Field type="password"
+             name="password"
+      />
+      <div onClick={props.submitForm}>login</div>
+    </Form>
+  );
+};
 
 export default SignUpForm;
