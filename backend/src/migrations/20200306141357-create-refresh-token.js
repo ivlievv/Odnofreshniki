@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('RefreshTokens', {
+    return queryInterface.createTable( 'RefreshTokens', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -10,18 +10,18 @@ module.exports = {
       },
       userId: {
         type: Sequelize.INTEGER,
-        allowNull:false,
-        references:{
-            model:'Users',
-            key: 'id',
-          onDelete: 'CASCADE',
-          onUpdate:'RESTRICT',
-        }
+        allowNull: false,
+        references: {
+          model: 'Users',
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'RESTRICT',
       },
       refreshToken: {
         type: Sequelize.TEXT,
-        unique:true,
-        allowNull:false,
+        unique: true,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
@@ -31,9 +31,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    });
+    } );
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('RefreshTokens');
+    return queryInterface.dropTable( 'RefreshTokens' );
   }
 };
