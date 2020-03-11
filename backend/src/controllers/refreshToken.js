@@ -1,5 +1,7 @@
-const { RefreshToken } = require( '../models' );
-const Controller = require( '../utils/controller' );
+import { RefreshToken } from './../models';
+
+import Controller          from './../utils/controller';
+import { BadRequestError } from '../utils/errors';
 
 class RefreshTokenController {
 
@@ -7,12 +9,20 @@ class RefreshTokenController {
     this._controller = new Controller( RefreshToken );
   }
 
-  saveRefreshToken = async (req, res, next) => {
+  createRefreshToken = async (req, res, next) => {
     try {
+      const refreshToken = await this._controller.create( {
+                                                            refreshToken: req.tokenPair.value,
+                                                            userId: req.user.id,
+                                                          } );
 
-      await this._controller.create( {
-
-                                     } );
+      if (refreshToken) {
+        return res.send( {
+                           tokenPair: req.tokenPair,
+                           user: req.user,
+                         } );
+      }
+      next( new BadRequestError() );
     } catch (e) {
       next( e );
     }
@@ -20,4 +30,4 @@ class RefreshTokenController {
 
 }
 
-module.exports = new RefreshTokenController();
+export default new RefreshTokenController();

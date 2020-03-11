@@ -1,39 +1,18 @@
-const { User } = require( '../models' );
-const Controller = require( '../utils/controller' );
+import { User } from './../models';
+
+import Controller from './../utils/controller';
 
 class UserController {
+
   constructor () {
     this._controller = new Controller( User );
   }
 
   createUser = async (req, res, next) => {
     try {
-      const newUser = await this._controller.create( req.body );
-      const userData = newUser.get();
+      const userData = (await this._controller.create( req.body )).get();
       delete userData.password;
-      res.send( userData );
-
-    } catch (e) {
-      next( e );
-    }
-  };
-  updateUserById = async (req, res, next) => {
-    try {
-      const updatedUser = await this._controller.update( req.userId, req.body );
-      const data = updatedUser.get();
-      delete data.password;
-      return res.send( data );
-    } catch (e) {
-      next( e );
-    }
-  };
-  getUserById = async (req, res, next) => {
-    try {
-      res.send( await this._controller.read( req.userId, {
-        attributes: {
-          exclude: ['password'],
-        }
-      } ) );
+      res.status( 201 ).send( userData );
     } catch (e) {
       next( e );
     }
@@ -41,7 +20,31 @@ class UserController {
 
   deleteUserById = async (req, res, next) => {
     try {
-      res.send( `${await this._controller.delete( req.userId )}` );
+      res.send( `${await this._controller.delete( req.params.id )}` );
+    } catch (e) {
+      next( e );
+    }
+  };
+
+  getUserById = async (req, res, next) => {
+    try {
+
+      res.send( await this._controller.read( req.params.id, {
+        attributes: {
+          exclude: ['password']
+        }
+      } ) );
+
+    } catch (e) {
+      next( e );
+    }
+  };
+
+  updateUserById = async (req, res, next) => {
+    try {
+      const userData = (await this._controller.update( req.params.id, req.body )).get();
+      delete userData.password;
+      res.send( userData );
     } catch (e) {
       next( e );
     }
@@ -49,4 +52,4 @@ class UserController {
 
 }
 
-module.exports = new UserController();
+export default new UserController();

@@ -3,7 +3,7 @@ const { checkAuthorization } = require('../middelwares/user' );
 const userRouter = require( './user.js' );
 const taskRouter = require( './task.js' );
 const adminRouter = require( './admin.js' );
-const { handleAppError } = require( '../middelwares/error_handleres' );
+const { handleAppError } = require('../middelwares/errorHandler' );
 
 const router = express.Router();
 
