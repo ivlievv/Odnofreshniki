@@ -14,14 +14,12 @@ module.exports = {
         references: {
           model: 'Users',
           key: 'id',
-        },
-        onDelete: 'CASCADE',
-        onUpdate: 'RESTRICT',
+        }
       },
-      refreshToken: {
+      value: {
         type: Sequelize.TEXT,
-        unique: true,
         allowNull: false,
+        unique: true,
       },
       createdAt: {
         allowNull: false,

@@ -11,10 +11,10 @@ export const SALT_ROUND = 6;
  * @enum {RoleType}
  */
 export const ROLE = Object.freeze( {
-                                     USER: 'USER',
-                                     ADMIN: 'ADMIN',
-                                     MODERATOR: 'MODERATOR',
-                                   } );
+    USER: 'USER',
+    ADMIN: 'ADMIN',
+    MODERATOR: 'MODERATOR',
+} );
 
 /**
  * @typedef {Symbol} ActionType
@@ -25,11 +25,11 @@ export const ROLE = Object.freeze( {
  * @enum {ActionType}
  */
 export const ACTION = Object.freeze( {
-                                       CREATE: Symbol( 'CREATE' ),
-                                       READ: Symbol( 'READ' ),
-                                       UPDATE: Symbol( 'UPDATE' ),
-                                       DELETE: Symbol( 'DELETE' ),
-                                     } );
+    CREATE: Symbol( 'CREATE' ),
+    READ: Symbol( 'READ' ),
+    UPDATE: Symbol( 'UPDATE' ),
+    DELETE: Symbol( 'DELETE' ),
+} );
 
 /**
  * @typedef {string} EntityType
@@ -40,6 +40,6 @@ export const ACTION = Object.freeze( {
  * @enum {EntityType}
  */
 export const ENTITY = Object.freeze( {
-                                       ...ROLE,
-                                       TASK: 'TASK',
-                                     } );
+    ...ROLE,
+    TASK: 'TASK',
+} );

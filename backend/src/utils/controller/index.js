@@ -1,4 +1,4 @@
-const { ResourceNotFoundError, BadRequestError } = require( '../application_errors' );
+import { BadRequestError, ResourceNotFoundError } from './../errors';
 
 class Controller {
 
@@ -18,15 +18,13 @@ class Controller {
     throw new BadRequestError();
   };
   read = async (id, options = {}) => {
-
     const instance = await this.model.findByPk( id, options );
     if (instance) {
       return instance;
     }
-    throw new ResourceNotFoundError( this.model.name );
+    throw new Error();
   };
   update = async (id, data) => {
-
     const [updatedRowsCount, updatedRows] = await this.model.update( data, {
       where: {
         id,
@@ -37,21 +35,19 @@ class Controller {
       return updatedRows[0];
     }
     throw new ResourceNotFoundError( this.model.name );
-
   };
   delete = async (id) => {
-
     const deletedRowsCount = await this.model.destroy( {
-                                                         where: {
-                                                           id,
-                                                         }
-                                                       } );
+      where: {
+        id,
+      }
+    } );
     if (deletedRowsCount) {
       return deletedRowsCount;
     }
     throw new ResourceNotFoundError( this.model.name );
-
   };
+
 }
 
-module.exports = Controller;
+export default Controller;

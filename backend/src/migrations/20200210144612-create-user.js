@@ -1,6 +1,12 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
+
+    const nameAttribute = {
+      type: Sequelize.STRING,
+      allowNull: false,
+    };
+
     return queryInterface.createTable( 'Users', {
       id: {
         allowNull: false,
@@ -8,22 +14,17 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      firstName: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      lastName: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
+      firstName: nameAttribute,
+      lastName: nameAttribute,
       email: {
         type: Sequelize.STRING,
-        unique: true,
         allowNull: false,
+        unique: true,
       },
       passwordHash: {
         type: Sequelize.TEXT,
-        allowNull: false,
+        allowNull: false
+
       },
       profilePicture: {
         type: Sequelize.TEXT,

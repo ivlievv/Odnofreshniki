@@ -14,7 +14,7 @@ module.exports = {
 	},
 	'rules': {
 		'indent': [
-			'error',
+			'warn',
 			'tab'
 		],
 		'linebreak-style': [
@@ -22,12 +22,14 @@ module.exports = {
 			'unix'
 		],
 		'quotes': [
-			'error',
+			'warn',
 			'single'
 		],
-		'semi': [
-			'error',
+		semi: [
+			'warn',
 			'always'
-		]
+		],
+		eqeqeq: 'error',
+		'for-direction': 'error'
 	}
 };
