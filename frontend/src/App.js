@@ -1,30 +1,51 @@
-import React                                      from 'react';
+import React, { Component, lazy, Suspense }       from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import HomePage                                   from './pages/HomePage.js';
-import SignUpPage                                 from './pages/SignUpPage.js';
-import SignInPage                                 from './pages/SignInPage.js';
+import './App.css';
+import { THEME_MODE }                             from './constants/enums.js';
 
-function App () {
-  return (
-    <Router>
-      <Switch>
+const SignUpPage = lazy( () => import( './pages/SignUpPage.js' ) );
+const SignInPage = lazy( () => import( './pages/SignInPage/SignInPage.js' ) );
+const HomePage = lazy( () => import( './pages/HomePage.js' ) );
 
-        <Route exact path="/">
-          <HomePage/>
-        </Route>
+const fallbackElem = <div className='loader'>Loading...</div>;
 
+export const AppContext = React.createContext( {} );
 
-        <Route path="/sign_up">
-          <SignUpPage/>
-        </Route>
+class App extends Component {
 
-        <Route path={['/sign_in', '/login']}>
-          <SignInPage/>
-        </Route>
+  state = {
+    theme: THEME_MODE.LIGHT,
+  };
 
-      </Switch>
-    </Router>
-  );
+  changeTheme = () => {
+    this.setState( state => ({
+      theme: state.theme === THEME_MODE.LIGHT
+          ? THEME_MODE.DARK
+          : THEME_MODE.LIGHT,
+    }) );
+  };
+
+  render () {
+
+    const contextValue = {
+      state: this.state,
+      changeTheme: this.changeTheme
+    };
+
+    return (
+        <AppContext.Provider value={contextValue}>
+          <Router>
+            <Suspense fallback={fallbackElem}>
+              <Switch>
+                <Route exact path="/" component={HomePage}/>
+                <Route path={['/signup', '/sign_up']} component={SignUpPage}/>
+                <Route path={['/signin', '/sign_in', '/login']} component={SignInPage}/>
+              </Switch>
+            </Suspense>
+          </Router>
+        </AppContext.Provider>
+    );
+  }
 }
 
 export default App;

@@ -1,12 +1,20 @@
-import React          from 'react';
-import { withRouter } from 'react-router';
+import React, { Component } from 'react';
+import { withRouter }       from 'react-router';
+import { AppContext }       from '../App.js';
+import Navigation           from '../components/Navigation';
 
-function HomePage (props) {
-  return (
+class HomePage extends Component {
 
-    <h1>Home Page</h1>
-
-  );
+  render () {
+    return (
+        <>
+          <h1>Home Page!</h1>
+          <Navigation/>
+        </>
+    );
+  }
 }
+
+HomePage.contextType = AppContext;
 
 export default withRouter( HomePage );
